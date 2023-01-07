@@ -7,20 +7,37 @@
 //     }
 // }
 
-export const addArtist = async (newArtist)=>{
+export const addAlbum = async (newAlbum)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/artists',{
+        const res = await fetch('http://localhost:3000/api/albums',{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
             },
-            body : JSON.stringify(newArtist)
+            body : JSON.stringify(newAlbum)
         })
         return res
     }catch(error){
         console.log(error)
     }
 }
+
+export const rateAlbum = async (id,rate) => {
+    // Send rate to backend here
+    console.log('id:',id,' rate:',rate)
+    try{
+        const res = await fetch('http://localhost:3000/api/albums/rateAlbum',{
+            method:'POST',
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body : JSON.stringify({id:id,rate:rate})
+        })
+        return res
+    }catch(error){
+        console.log(error)
+    }
+};
   
 // export const updateUser = async ({query,newUser})=>{
 // try{
@@ -36,9 +53,8 @@ export const addArtist = async (newArtist)=>{
 // }
 // }
 
-export const getArtists = async()=>{
-    const res = await fetch("http://localhost:3000/api/artists")
+export const getAlbums = async()=>{
+    const res = await fetch("http://localhost:3000/api/albums")
     const data = await res.json()
-    console.log('artist data', data)
     return data   
 }

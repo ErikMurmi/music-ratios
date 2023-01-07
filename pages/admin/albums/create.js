@@ -1,7 +1,9 @@
+import { getArtists } from 'controllers/artistasControllers';
 import React, { useState } from 'react';
 import { genres } from 'utils/data';
+import { addAlbum } from 'controllers/albumsController';
 
-export default function AddAlbumForm() {
+export default function AddAlbumForm(props) {
   const [album, setAlbum] = useState({
     title: '',
     artist: '',
@@ -9,6 +11,7 @@ export default function AddAlbumForm() {
     genre: '',
     tracks: '',
     votes: 0,
+    ratingSum:0,
     rating: 0
   });
 
@@ -20,9 +23,15 @@ export default function AddAlbumForm() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('album:',album)
+    const res = await addAlbum(album)
+    if(res.ok){
+      alert('El disco se añadió')
+    }else{
+      alert('Error al guardar el disco')
+    }
     // Submit form data to backend here
   };
 
@@ -37,12 +46,17 @@ export default function AddAlbumForm() {
       />
       <br />
       <label htmlFor="artist">Artist:</label>
-      <input
-        type="text"
+      <select
         id="artist"
         name="artist"
         onChange={handleChange}
-      />
+      >
+        {props.artists.map((artist,index) => (
+          <option key={index} value={artist.name}>
+            {artist.name}
+          </option>
+        ))}
+      </select>
       <br />
       <label htmlFor="year">Year:</label>
       <input
@@ -75,4 +89,14 @@ export default function AddAlbumForm() {
       <br />
       <button type='submit'>Add</button>
     </form>)
+}
+
+export const getServerSideProps = async () => {
+  const artists = await getArtists()
+  return {
+    props: {
+      artists: artists
+    }
+  }
+
 }

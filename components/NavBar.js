@@ -61,11 +61,20 @@ export const NavBar =()=>{
             <Link href='/'>
                 <li>Home</li>
             </Link>
-            <Link href='/instalaciones'>
-                <li>Instalaciones</li>
+            <Link href='/admin/artists'>
+                <li>Artistas</li>
             </Link>
-            <Link href='/desafios'>
-                <li>Desafios</li>
+            <Link href='/public/suggestions'>
+                <li>For me</li>
+            </Link>
+            <Link href='/admin/albums'>
+                <li>Albums</li>
+            </Link>
+            <Link href='/public/albums'>
+                <li>Albums Clientes</li>
+            </Link>
+            <Link href='/admin/albums/create'>
+                <li>Crear album</li>
             </Link>  
             {user ? <button onClick={()=>{signOut(auth)
                 } }  >

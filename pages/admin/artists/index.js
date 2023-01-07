@@ -2,11 +2,11 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { getArtists } from 'controllers/artistasControllers'
 
-const Artists = () => {
+const Artists = ({artists}) => {
   const router = useRouter()
-  const [artists, setArtists] = useState([])
-  const [loading, setLoading] = useState(true)
+  //const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Fetch artists from API or database here
@@ -29,16 +29,12 @@ const Artists = () => {
     // Then, fetch the updated list of artists and set the state with setArtists
   }
 
-  if (loading) {
-    return <p>Loading...</p>
-  }
-
   return (
     <div>
       <h1>Artists</h1>
       <ul>
-        {artists.map((artist) => (
-          <li key={artist.id}>
+        {artists.map((artist,index) => (
+          <li key={index}>
             <h2>{artist.name}</h2>
             <p>{artist.description}</p>
             <p>{artist.genre}</p>
@@ -49,9 +45,19 @@ const Artists = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => router.push('/artists/create')}>Create New Artist</button>
+      <button onClick={() => router.push('/admin/artists/create')}>Create New Artist</button>
     </div>
   )
 }
 
 export default Artists
+
+export const getServerSideProps = async () => {
+  const artists = await getArtists()
+  return {
+    props: {
+      artists: artists
+    }
+  }
+
+}
