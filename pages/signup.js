@@ -62,7 +62,7 @@ export const signup = () => {
             <h1>Unete a la comunidad</h1>
             <form onSubmit={signUp}>
 
-                <label htmlFor="nombre">Nombre y Apellido*</label><br />
+                <label htmlFor="nombre">Nickname</label><br />
                 <input id="nombre" type="text" name="name" onChange={handleChange}
                     placeholder="Tu nombre completo"></input> <br />
                 <label htmlFor="email">Email</label><br />

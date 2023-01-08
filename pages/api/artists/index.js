@@ -13,7 +13,8 @@ export default async function handler(req, res) {
             const querySnapshot = await getDocs(collection(db, Collections.ARTISTS));
             const sol = querySnapshot.docs.map((doc) => {
                 const data = doc.data()
-                return data
+                const id = doc.id
+                return {id,...data}
             })
             return res.status(200).json(sol)
         case 'POST':

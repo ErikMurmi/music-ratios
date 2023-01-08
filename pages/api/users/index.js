@@ -14,6 +14,7 @@ export default async function handler(req, res) {
             return res.status(200).json(sol)
         case 'POST':
             console.log("body ", body)
+            body.role = "user"
             const result = await addDoc(collection(db,Collections.USERS),body)
             //const result = await getUser(body.id)
             console.log(result)

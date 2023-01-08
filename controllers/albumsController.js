@@ -22,6 +22,18 @@ export const addAlbum = async (newAlbum)=>{
     }
 }
 
+export const deleteAlbum = async (id)=>{
+    try{
+        const res = await fetch('http://localhost:3000/api/albums/'+id,{
+            method:'DELETE'
+        })
+        return res
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
 export const rateAlbum = async (id,rate) => {
     // Send rate to backend here
     console.log('id:',id,' rate:',rate)
@@ -58,3 +70,21 @@ export const getAlbums = async()=>{
     const data = await res.json()
     return data   
 }
+
+export const getSuggestions = async (preferences) => {
+    // Send rate to backend here
+    console.log('preferences:',preferences)
+    try{
+        const res = await fetch('http://localhost:3000/api/albums/getSuggestions',{
+            method:'POST',
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body : JSON.stringify({preferences:preferences})
+        })
+        const data = await res.json()
+        return data   
+    }catch(error){
+        console.log(error)
+    }
+};

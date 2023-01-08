@@ -35,7 +35,6 @@ const Albums = ({albums}) => {
             <select
               id="rate"
               name="rate"
-              value={rate}
               onChange={handleRateChange}
             >
               <option value={1}>1</option>

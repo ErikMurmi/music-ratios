@@ -36,7 +36,8 @@ try{
 }
 
 export const getUser = async(query)=>{
-    const res = await fetch("http://localhost:3000/api/users/"+query.id)
+    console.log('la query es : ', query )
+    const res = await fetch(`http://localhost:3000/api/users/getById?id=${query.id}`)
     const data = await res.json()
     return data   
 }
