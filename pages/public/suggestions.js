@@ -5,7 +5,7 @@ import { rateAlbum } from 'controllers/albumsController'
 import useUser from 'hooks/useUser'
 import { getUser } from "controllers/usersController"
 
-const suggestions = ({albums}) => {
+const Suggestions = () => {
   const user = useUser()
 
   const [userInfo,setUserInfo] = useState({})
@@ -116,14 +116,5 @@ function solvePercentajes(){
   );
 }
 
-export default suggestions
+export default Suggestions
 
-export const getServerSideProps = async () => {
-  const albums = await getAlbums()
-  return {
-    props: {
-      albums: albums
-    }
-  }
-
-}

@@ -7,7 +7,7 @@ import { auth } from "../config/client"
 import { addUser } from "../controllers/usersController"
 import { genres } from "utils/data"
 
-export const signup = () => {
+export const Signup = () => {
     const user = useUser()
     const router = useRouter()
     let selectedGenres= [];
