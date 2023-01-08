@@ -1,15 +1,7 @@
-// export const deleteUser = async(selectedUser)=>{
-//     try{
-//       await fetch(`http://localhost:3000/api/users/${selectedUser._id}`,{
-//       method:"DELETE",})
-//     }catch (error){
-//       console.log(error)
-//     }
-// }
-
+const base_url=process.env.NEXT_PUBLIC_base_api_url
 export const addArtist = async (newArtist)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/artists',{
+        const res = await fetch(`${base_url}/artists`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -24,7 +16,7 @@ export const addArtist = async (newArtist)=>{
 
 export const deleteArtist = async (id)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/artists/'+id,{
+        const res = await fetch(`${base_url}/artists/`+id,{
             method:'DELETE'
         })
         return res
@@ -34,7 +26,7 @@ export const deleteArtist = async (id)=>{
 }
 
 export const getArtists = async()=>{
-    const res = await fetch("http://localhost:3000/api/artists")
+    const res = await fetch(`${base_url}/artists`)
     const data = await res.json()
     console.log('artist data', data)
     return data   

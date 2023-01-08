@@ -1,15 +1,8 @@
-// export const deleteUser = async(selectedUser)=>{
-//     try{
-//       await fetch(`http://localhost:3000/api/users/${selectedUser._id}`,{
-//       method:"DELETE",})
-//     }catch (error){
-//       console.log(error)
-//     }
-// }
+const base_url=process.env.NEXT_PUBLIC_base_api_url
 
 export const addAlbum = async (newAlbum)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/albums',{
+        const res = await fetch(`${base_url}/albums`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -24,7 +17,7 @@ export const addAlbum = async (newAlbum)=>{
 
 export const deleteAlbum = async (id)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/albums/'+id,{
+        const res = await fetch(`${base_url}/albums/`+id,{
             method:'DELETE'
         })
         return res
@@ -38,7 +31,7 @@ export const rateAlbum = async (id,rate) => {
     // Send rate to backend here
     console.log('id:',id,' rate:',rate)
     try{
-        const res = await fetch('http://localhost:3000/api/albums/rateAlbum',{
+        const res = await fetch(`${base_url}/albums/rateAlbum`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -66,7 +59,7 @@ export const rateAlbum = async (id,rate) => {
 // }
 
 export const getAlbums = async()=>{
-    const res = await fetch("http://localhost:3000/api/albums")
+    const res = await fetch(`${base_url}/albums`)
     const data = await res.json()
     return data   
 }
@@ -75,7 +68,7 @@ export const getSuggestions = async (preferences) => {
     // Send rate to backend here
     console.log('preferences:',preferences)
     try{
-        const res = await fetch('http://localhost:3000/api/albums/getSuggestions',{
+        const res = await fetch(`${base_url}/albums/getSuggestions`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
