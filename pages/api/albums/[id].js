@@ -1,12 +1,13 @@
 import { collection, collec, doc,deleteDoc, } from "firebase/firestore";
 import { db } from "config/client";
+import handler from ".";
 const Collections = {
     USERS: 'users',
     ARTISTS: 'artists',
     ALBUMS: 'albums'
 }
 
-export default async(req,res) =>
+export default handler= async(req,res) =>
 {
     const {method,body,query:{id}} = req
     switch(method){
