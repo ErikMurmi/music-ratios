@@ -1,4 +1,4 @@
-const base_url=process.env.NEXT_PUBLIC_APIKEY
+const base_url=process.env.NEXT_PUBLIC_base_api_url
 
 export const deleteUser = async(selectedUser)=>{
     try{
