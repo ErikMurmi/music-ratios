@@ -1,6 +1,7 @@
 import { collection, getDocs, addDoc, doc, getDoc, query,where } from "firebase/firestore";
 import { db } from "config/client";
 
+const base_url=process.env.NEXT_PUBLIC_base_api_url
 const miminumRating = 3.5
 
 export default async function getSuggestions(req,res){
@@ -11,14 +12,14 @@ export default async function getSuggestions(req,res){
         res.status(400).send("Se debe enviar un preferencias")
         return
     }
-    const response = await fetch("http://localhost:3000/api/albums")
+    const response = await fetch(`${base_url}/albums`)
     const albums = await response.json()
     //console.log('albums: ', albums)
 
     for(let i=0; i<albums.length;i++){
         const album = albums[i]
         if(matchGenre(album,preferences) && album.rating > miminumRating){
-            const artistRes = await fetch(`http://localhost:3000/api/artists/getByName?name=${album.artist}`)
+            const artistRes = await fetch(`${base_url}/artists/getByName?name=${album.artist}`)
             const artist = await artistRes.json()
             if(artist.genre===album.genre){
                 album.rating += 1
