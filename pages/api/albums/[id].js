@@ -1,6 +1,5 @@
 import { collection, collec, doc,deleteDoc, } from "firebase/firestore";
 import { db } from "config/client";
-import handler from ".";
 const Collections = {
     USERS: 'users',
     ARTISTS: 'artists',
