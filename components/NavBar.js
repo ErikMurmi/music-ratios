@@ -84,7 +84,7 @@ export const NavBar =()=>{
             <Link href='/signin'>
                 <li>Login</li>
             </Link>
-            <Link href='/signup'>
+            <Link href='/Signup'>
                 <li>Registrarse</li>
             </Link>
             </ul>
