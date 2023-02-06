@@ -8,7 +8,7 @@ import { addUser } from "../controllers/usersController"
 import { genres } from "utils/data"
 
 export const Signup = () => {
-    const user = useUser()
+    //const user = useUser()
     const router = useRouter()
     let selectedGenres= [];
     const [newUser, setNewUser] = useState({
@@ -17,9 +17,9 @@ export const Signup = () => {
         preferencias:[]
     })
 
-    useEffect(() => {
-        user && router.replace("/")
-    }, [user])
+    // useEffect(() => {
+    //     user && router.replace("/")
+    // }, [user])
 
     const handleChange = (e) => {
         const { value, name } = e.target
@@ -47,6 +47,17 @@ export const Signup = () => {
             .then(async (userCredential) => {
                 const user = userCredential.user;
                 addUser({ id: user.uid, ...newUser })
+                const res = await fetch(`https://service-mail.onrender.com/send-email`,{
+                    method:'POST',
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body : {
+                        "email": newUser.email,
+                        "message":"Bienvenido a la familia"
+                    }
+                })
+                alert(res)
             })
             .catch((error) => {
                 const errorCode = error.code;
