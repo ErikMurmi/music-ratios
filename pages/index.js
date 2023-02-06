@@ -8,6 +8,20 @@ import { getUser } from "controllers/usersController"
 
 export default function Home() {
 
+  const sendEmail = async () => {
+    const res = await fetch(`http://localhost:3030/send-email`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "email": "erikmurminacho07@outlook.com",
+        "message": "Bienvenido a la familia"
+      })
+    })
+    alert(res)
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,6 +34,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Music Ratios
         </h1>
+        <button onClick={sendEmail}>Mail test</button>
       </main>
 
       <footer className={styles.footer}>
