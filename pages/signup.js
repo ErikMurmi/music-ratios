@@ -10,11 +10,11 @@ import { genres } from "utils/data"
 export const Signup = () => {
     //const user = useUser()
     const router = useRouter()
-    let selectedGenres= [];
+    let selectedGenres = [];
     const [newUser, setNewUser] = useState({
         name: '',
         email: '',
-        preferencias:[]
+        preferencias: []
     })
 
     // useEffect(() => {
@@ -28,43 +28,49 @@ export const Signup = () => {
 
     const handleGenreChange = (e) => {
         //setSelectedGenres(event.target.value);
-        const {value,checked} = e.target
-        if (checked){
+        const { value, checked } = e.target
+        if (checked) {
             selectedGenres.push(value)
-        }else{
-            selectedGenres = Array.from(selectedGenres.filter((item)=>item!==value))
+        } else {
+            selectedGenres = Array.from(selectedGenres.filter((item) => item !== value))
         }
-        console.log('checkbox value ',selectedGenres)
-      };
+        console.log('checkbox value ', selectedGenres)
+    };
+
+
+    const sendEmail = async (email) => {
+        const res = await fetch(`http://localhost:3030/send-email`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "email": email,
+                "message": "Bienvenido a la familia"
+            })
+        })
+
+        alert(await res.json())
+    }
 
     const signUp = async (form) => {
         form.preventDefault()
         newUser.preferencias = selectedGenres
-        if (newUser.preferencias.length<3){
+        if (newUser.preferencias.length < 3) {
             alert("Debes seleccionar al menos 3 generos musicales")
-        }else{
+        } else {
             await createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
-            .then(async (userCredential) => {
-                const user = userCredential.user;
-                addUser({ id: user.uid, ...newUser })
-                const res = await fetch(`https://service-mail.onrender.com/send-email`,{
-                    method:'POST',
-                    headers:{
-                        "Content-Type":"application/json"
-                    },
-                    body : {
-                        "email": newUser.email,
-                        "message":"Bienvenido a la familia"
-                    }
+                .then(async (userCredential) => {
+                    const user = userCredential.user;
+                    addUser({ id: user.uid, ...newUser })
+                    await sendEmail(newUser.email)
                 })
-                alert(res)
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("code:", errorCode, "msg:", errorMessage)
-                return null
-            });
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log("code:", errorCode, "msg:", errorMessage)
+                    return null
+                });
         }
     }
 
@@ -83,11 +89,11 @@ export const Signup = () => {
                 <input id="contrasenia" name="password" onChange={handleChange}
                     type="password" placeholder="Mínimo 6 caracteres" minLength={6}></input> <br />
                 <label htmlFor="genres">Genres:</label>
-                {genres.map((genre, index) => (  
+                {genres.map((genre, index) => (
                     <div key={index}>
                         <label>{genre}</label>
                         <input type="checkbox" onChange={handleGenreChange}
-                         value={genre}></input>
+                            value={genre}></input>
                     </div>
                 ))}
                 <input type="submit" value="Registrar"></input>

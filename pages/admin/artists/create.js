@@ -18,11 +18,12 @@ function AddArtistForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await addArtist(newArtist)
-    if(res.ok){
-      alert("Se agrego su artista")
-    }else{
-      alert("No se pudo agregar el artista")
-    }
+    console.log('res is :' + res)
+    // if(res.ok){
+    //   alert("Se agrego su artista")
+    // }else{
+    //   alert("No se pudo agregar el artista")
+    // }
     // Submit form data to backend here
   };
 

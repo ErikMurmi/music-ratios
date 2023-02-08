@@ -1,8 +1,10 @@
 const base_url=process.env.NEXT_PUBLIC_base_api_url
 
+const service_url=process.env.NEXT_PUBLIC_MUSIC_SERVICE
+
 export const addAlbum = async (newAlbum)=>{
     try{
-        const res = await fetch(`${base_url}/albums`,{
+        const res = await fetch(`${service_url}/albums`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -17,7 +19,7 @@ export const addAlbum = async (newAlbum)=>{
 
 export const deleteAlbum = async (id)=>{
     try{
-        const res = await fetch(`${base_url}/albums/`+id,{
+        const res = await fetch(`${service_url}/albums/`+id,{
             method:'DELETE'
         })
         return res
@@ -59,7 +61,7 @@ export const rateAlbum = async (id,rate) => {
 // }
 
 export const getAlbums = async()=>{
-    const res = await fetch(`${base_url}/albums`)
+    const res = await fetch(`${service_url}/albums`)
     const data = await res.json()
     return data   
 }

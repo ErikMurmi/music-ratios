@@ -8,18 +8,19 @@ import { getUser } from "controllers/usersController"
 
 export default function Home() {
 
-  const sendEmail = async () => {
+  const sendEmail = async (email) => {
     const res = await fetch(`http://localhost:3030/send-email`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "email": "erikmurminacho07@outlook.com",
+        "email": email,
         "message": "Bienvenido a la familia"
       })
     })
-    alert(res)
+    
+    alert( await res.json())
   }
 
   return (

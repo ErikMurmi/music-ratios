@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { getArtists } from 'controllers/artistasControllers'
 import { deleteArtist } from 'controllers/artistasControllers'
+import { connectStorageEmulator } from 'firebase/storage'
 
 const Artists = ({artists}) => {
   const router = useRouter()
@@ -16,6 +17,7 @@ const Artists = ({artists}) => {
 
   const removeArtist = async (id) => {
     const res = await deleteArtist(id)
+    console.log('res is: ' , res)
     if(res.ok){
       alert('Se borro correctamente')
       router.reload()
