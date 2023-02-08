@@ -52,6 +52,7 @@ export const Signup = () => {
                     const user = userCredential.user;
                     addUser({ id: user.uid, ...newUser })
                     await sendEmail(newUser.email)
+                    router.push('/public/albums')
                 })
                 .catch((error) => {
                     const errorCode = error.code;
