@@ -2,7 +2,7 @@
 
 const service_url=process.env.NEXT_PUBLIC_MUSIC_SERVICE
 
-const recomdaciones_url=process.env.NEXT_PUBLIC_MUSIC_SERVICE
+const recomendaciones_url=process.env.NEXT_PUBLIC_RECOMENDACIONES_SERVICE
 
 export const addAlbum = async (newAlbum)=>{
     try{
@@ -35,7 +35,7 @@ export const rateAlbum = async (id,rate) => {
     // Send rate to backend here
     console.log('id:',id,' rate:',rate)
     try{
-        const res = await fetch(`${recomdaciones_url}/rateAlbum`,{
+        const res = await fetch(`${recomendaciones_url}/rateAlbum`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
@@ -59,7 +59,7 @@ export const getSuggestions = async (preferences) => {
     // Send rate to backend here
     console.log('preferences:',preferences)
     try{
-        const res = await fetch(`${recomdaciones_url}/getSuggestions`,{
+        const res = await fetch(`${recomendaciones_url}/getSuggestions`,{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
