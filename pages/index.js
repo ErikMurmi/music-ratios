@@ -5,22 +5,12 @@ import { auth } from "config/client"
 import useUser from "hooks/useUser"
 import { useEffect, useState } from "react"
 import { getUser } from "controllers/usersController"
+import { sendEmail } from 'controllers/mailController'
 
 export default function Home() {
 
-  const sendEmail = async (email) => {
-    const res = await fetch(`http://localhost:3030/send-email`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "email": email,
-        "message": "Bienvenido a la familia"
-      })
-    })
-    
-    alert( await res.json())
+  const send = async (email) => {
+    await sendEmail("erikmurminacho07@outlook.com")
   }
 
   return (
@@ -35,7 +25,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Music Ratios
         </h1>
-        <button onClick={sendEmail}>Mail test</button>
+        <button onClick={send}>Mail test</button>
       </main>
 
       <footer className={styles.footer}>

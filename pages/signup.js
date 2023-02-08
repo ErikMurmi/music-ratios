@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../config/client"
 import { addUser } from "../controllers/usersController"
 import { genres } from "utils/data"
+import { sendEmail } from "controllers/mailController"
 
 export const Signup = () => {
     //const user = useUser()
@@ -38,20 +39,7 @@ export const Signup = () => {
     };
 
 
-    const sendEmail = async (email) => {
-        const res = await fetch(`http://localhost:3030/send-email`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "email": email,
-                "message": "Bienvenido a la familia"
-            })
-        })
 
-        alert(await res.json())
-    }
 
     const signUp = async (form) => {
         form.preventDefault()
