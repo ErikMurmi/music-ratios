@@ -24,3 +24,12 @@ a {
     background: black;
   }
 }
+
+.albums-list,.artist-list{
+  margin: 0 auto;
+  list-style-type: none;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: 90%;
+}

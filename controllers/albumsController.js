@@ -46,19 +46,6 @@ export const rateAlbum = async (id,rate) => {
     }
 };
   
-// export const updateUser = async ({query,newUser})=>{
-// try{
-//     await fetch('http://localhost:3000/api/users/'+query.id,{
-//         method:'PUT',
-//         headers:{
-//             "Content-Type":"application/json"
-//         },
-//         body : JSON.stringify(newUser)
-//     })
-// }catch(error){
-//     console.log(error)
-// }
-// }
 
 export const getAlbums = async()=>{
     const res = await fetch(`${service_url}/albums`)
